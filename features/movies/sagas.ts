@@ -1,34 +1,23 @@
-import {all, call, put, takeEvery} from 'redux-saga/effects';
+import {call, put, takeEvery} from 'redux-saga/effects';
 import * as types from './types';
-import {GET_MOVIES, MovieItem} from './types';
-import {GET_DETAILS_API, GET_SEARCH_DATA_API} from '../../api/api';
+import {GET_USERS} from './types';
+import {GET_USERS_API} from '../../api/api';
 import * as actions from './actions';
 
 function* handler() {
-    yield takeEvery(GET_MOVIES, getMovies);
+    yield takeEvery(GET_USERS, getUsers);
 }
 
-function* getMovies(action: types.MoviesActionTypes) {
+function* getUsers() {
     try {
-        let query = action?.payload;
-        const response: types.MoviesAPIResponse = yield call(GET_SEARCH_DATA_API, {search: query});
+        const response: types.UsersAPIResponse = yield call(GET_USERS_API);
 
-        if(response.Response === "True"){
-            const movieData: MovieItem[] = yield all(
-                response?.Search.map(function* (movie) {
-                    const id = movie?.imdbID;
-                    const details = yield call(GET_DETAILS_API, {id})
-                    return {
-                        ...movie,
-                        imdbRating: details.imdbRating
-                    };
-                }),
-            );
+        if (response.users.length > 0) {
 
-            yield put(actions.getMoviesSuccess(movieData));
+            yield put(actions.getUsersSuccess(response.users));
         } else {
             //TODO: Can put here error action
-            yield put(actions.getMoviesSuccess([]));
+            yield put(actions.getUsersSuccess([]));
         }
 
     } catch (error) {

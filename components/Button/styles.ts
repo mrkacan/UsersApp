@@ -1,24 +1,19 @@
 import {Dimensions, StyleSheet} from 'react-native';
+
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
-    itemText: {
-        fontSize: 22,
+    buttonText: {
+        fontSize: 19,
         fontWeight: 'bold',
-        color: "#FFFFFF"
+        color: "#FFF"
     },
-    generalItemWrapper: {
-        flex: 1,
-        margin: 10,
-    },
-    itemWrapper: {
-        flex: 1,
-        padding: 10,
-        height: 150,
-        backgroundColor: '#000',
-        flexDirection: "row",
-        justifyContent: 'flex-start',
-        alignItems: 'flex-end',
+    buttonWrapper: {
+        backgroundColor: "#088ab9",
+        marginHorizontal: 10,
+        paddingVertical: 15,
+        alignItems:"center",
+        borderRadius: 10,
     },
 });
 

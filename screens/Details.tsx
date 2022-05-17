@@ -1,24 +1,59 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
+import React from 'react';
+import {Image, StyleSheet, Text, View, Pressable} from 'react-native';
+import {RootStackScreenProps} from '../types';
+import {useSelector} from "react-redux";
+import {getUserSelector} from "../features/movies/selectors";
+import FontAwesome from '@expo/vector-icons/build/FontAwesome';
+import {useNavigation} from "@react-navigation/native";
+import moment from "moment";
 
 
-export default function ModalScreen() {
-  return null
+export default function Details({route}: RootStackScreenProps<"Details">) {
+    const user = useSelector(getUserSelector(route.params?.id));
+    const navigation = useNavigation();
+    const age = Math.floor(moment(new Date()).diff(moment(user?.birthDate, "YYYY-MM-DD"), 'years', true))
+
+    return <View>
+        <Pressable onPress={navigation.goBack} style={styles.closeButton}>
+            <FontAwesome
+                name="close"
+                size={25}
+                color={"#000"}
+            />
+        </Pressable>
+        <Image source={{uri: user?.image}} style={styles.image}/>
+        <Text style={styles.fullName}>{`${user?.firstName} ${user?.lastName}, ${age}yo`}</Text>
+        <Text style={styles.address}>{`${user?.address.address}, ${user?.address.postalCode}, ${user?.address.city}`}</Text>
+    </View>
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    image: {
+        width: "100%",
+        height: 200,
+        resizeMode: "contain",
+    },
+    fullName: {
+        fontSize: 23,
+        fontWeight: "bold",
+        marginTop: 24,
+        alignSelf: "center"
+    },
+    address: {
+        width: "90%",
+        fontSize: 20,
+        fontWeight: "500",
+        marginTop: 24,
+        alignSelf: "center",
+        textAlign: "center"
+    },
+    closeButton: {
+        alignSelf: "flex-end",
+        padding: 20
+    }
 });

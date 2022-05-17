@@ -1,26 +1,28 @@
-import React, {useEffect, useState} from 'react';
-import {Button, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import * as moviesAction from '../features/movies/actions';
 import ListView from "../components/ListView";
 import {getUsersSelector} from "../features/movies/selectors";
 import {useNavigation} from "@react-navigation/native";
+import Button from '../components/Button';
 
-export default function UsersScreen() {
+export default function Users() {
     const dispatch = useDispatch();
-    const navigation = useNavigation();
-    const {data, isLoading} = useSelector(getUsersSelector);
-
-    useEffect(()=> {
+    const {data} = useSelector(getUsersSelector);
+    useEffect(() => {
         dispatch(moviesAction.getUsers());
     }, [])
 
+    const onUserAddPress = () => {
+
+    }
+
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity onPress={()=>navigation.navigate("Modal")} style={styles.searchInputWrapper}>
-
-            </TouchableOpacity>
+            <ListView data={data}/>
+            <Button onPress={onUserAddPress}>Add User</Button>
         </SafeAreaView>
     );
 }

@@ -1,15 +1,18 @@
 import * as moviesTypes from "./types";
-import * as userDataTypes from "../userData/types";
 
-export const getMoviesSelector = ({movies, userData}: {
-    movies: moviesTypes.MoviesState,
-    userData: userDataTypes.UserDataState
+export const getUsersSelector = ({users}: {
+    users: moviesTypes.UsersState,
 }) => {
-    const newData = movies.data.filter(item => userData.hiddenItems.findIndex(hiddenItem => item.imdbID === hiddenItem.imdbID) === -1)
-
     return {
-        data: newData,
-        isLoading: movies.isLoading,
-        error: movies.error
+        data: users.data,
+        isLoading: users.isLoading,
+        error: users.error
     }
+}
+
+export const getUserSelector = (id: number) => ({users}: {
+    users: moviesTypes.UsersState,
+}) => {
+    const user = users.data.find(item => item.id === id)
+    return user
 }

@@ -1,71 +1,24 @@
-import React, {useEffect} from "react";
-import {
-    ActivityIndicator,
-    FlatList,
-    LayoutAnimation,
-    StyleSheet,
-    UIManager,
-    View
-} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {MovieItem} from '../features/movies/types';
+import React from "react";
+import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {UserItem} from '../features/movies/types';
 import Item from "../components/Item";
-import {getMoviesSelector} from "../features/movies/selectors";
-import * as favoritesAction from "../features/userData/actions";
-import {getFavoriteItems} from "../features/userData/selectors";
+import {getUsersSelector} from "../features/movies/selectors";
+import {useNavigation} from "@react-navigation/native";
 
 const INITIAL_LOAD = 10;
 
 type ListViewProps = {
-    data: MovieItem[];
+    data: UserItem[];
 }
 
 const ListView: React.FC<ListViewProps> = ({data}) => {
-    const dispatch = useDispatch();
-    const {isLoading, error} = useSelector(getMoviesSelector);
-    const favoriteItemsData = useSelector(getFavoriteItems);
+    const navigation = useNavigation();
+    const {isLoading} = useSelector(getUsersSelector);
 
-    const setAnimation = () => {
-        LayoutAnimation.configureNext({
-            duration: 700,
-            update: {
-                type: LayoutAnimation.Types.easeIn,
-                property: LayoutAnimation.Properties.opacity,
-                springDamping: 0.7,
-            },
-        });
-        LayoutAnimation.configureNext({
-            duration: 500,
-            create: {
-                type: LayoutAnimation.Types.easeIn,
-                property: LayoutAnimation.Properties.opacity,
-                springDamping: 0.7,
-            },
-        });
-        LayoutAnimation.configureNext({
-            duration: 500,
-            delete: {
-                type: LayoutAnimation.Types.easeOut,
-                property: LayoutAnimation.Properties.opacity,
-                springDamping: 0.7,
-            },
-        });
-    };
-
-    useEffect(() => {
-        UIManager.setLayoutAnimationEnabledExperimental &&
-        UIManager.setLayoutAnimationEnabledExperimental(true);
-    }, [])
-
-    const onHidePress = (item: MovieItem) => {
-        setAnimation()
-        dispatch(favoritesAction.toggleHide(item));
+    const onItemPress = (item: UserItem) => {
+        navigation.navigate("Details", {id: item.id})
     }
-    const onFavoritePress = (item: MovieItem) => {
-        setAnimation()
-        dispatch(favoritesAction.toggleFavorite(item));
-    }
-
 
     return (
         <>
@@ -76,16 +29,13 @@ const ListView: React.FC<ListViewProps> = ({data}) => {
             }
             <FlatList
                 data={data}
-                keyExtractor={item => `infinite_scroll_item_${item.imdbID}`}
+                keyExtractor={item => `infinite_scroll_item_${item.id}`}
                 initialNumToRender={INITIAL_LOAD}
                 renderItem={({item}) => {
-                    return <Item {...item}
-                                 isFavorite={favoriteItemsData.findIndex(favoriteItem => favoriteItem.imdbID === item.imdbID) >= 0}
-                                 onHidePress={() => onHidePress(item)}
-                                 onFavoritePress={() => onFavoritePress(item)}
-                    />
+                    return <Item {...item} onPress={() => onItemPress(item)}/>
                 }}
                 contentContainerStyle={styles.flatListContent}
+                numColumns={2}
             />
         </>
     );
@@ -103,6 +53,7 @@ const styles = StyleSheet.create({
     },
     flatListContent: {
         marginTop: 20,
+        paddingBottom: 30
     }
 });
 

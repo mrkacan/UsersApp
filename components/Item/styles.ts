@@ -1,52 +1,28 @@
 import {Dimensions, StyleSheet} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
-const CARD_WIDTH = windowWidth - 20;
-const IMAGE_WIDTH = 100
+
 const styles = StyleSheet.create({
     itemText: {
         fontSize: 22,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: "#FFFFFF"
+    },
+    generalItemWrapper: {
+        flex: 1,
+        margin: 10,
+        borderRadius: 10,
+        borderWidth: 4,
+        borderColor: "#00a5e0",
+        overflow: "hidden"
     },
     itemWrapper: {
-        width: CARD_WIDTH,
+        flex: 1,
         padding: 10,
-        backgroundColor: '#FFFFFF',
-        marginBottom: 20,
+        height: 150,
+        backgroundColor: '#696969',
         flexDirection: "row",
-        alignSelf: 'center',
         justifyContent: 'flex-start',
-        alignItems: 'center',
-    },
-    rightWrapper: {
-      width: CARD_WIDTH - IMAGE_WIDTH - 20
-    },
-    image: {
-        width: 100,
-        height: 100,
-        resizeMode: 'cover',
-        marginRight: 10
-    },
-    title: {
-        fontSize: 15,
-        width: '80%',
-        fontWeight: '600',
-        marginBottom: 8
-    },
-    button: {
-        width:40,
-        height:30,
-        backgroundColor: "#105269",
-        borderRadius: 10,
-        alignItems: "center",
-        justifyContent: "center"
-    },
-    buttonWrapper: {
-        flexDirection: "row",
-        marginTop: 20,
-        marginRight: 10
-    },
-    leftMargin: {
-        marginLeft: 10
+        alignItems: 'flex-end',
     },
 });
 
