@@ -9,7 +9,7 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    blacklist: ['movies']
+    blacklist: ['users']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)

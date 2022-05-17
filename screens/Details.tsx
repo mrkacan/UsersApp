@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View, Pressable} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import {RootStackScreenProps} from '../types';
 import {useSelector} from "react-redux";
 import {getUserSelector} from "../features/users/selectors";
@@ -21,9 +21,14 @@ export default function Details({route}: RootStackScreenProps<"Details">) {
                 color={"#000"}
             />
         </Pressable>
+
+        <Text style={styles.title}>
+            Details
+        </Text>
         <Image source={{uri: user?.image}} style={styles.image}/>
         <Text style={styles.fullName}>{`${user?.firstName} ${user?.lastName}, ${age}yo`}</Text>
-        <Text style={styles.address}>{`${user?.address.address}, ${user?.address.postalCode}, ${user?.address.city}`}</Text>
+        <Text
+            style={styles.address}>{`${user?.address.address}, ${user?.address.postalCode}, ${user?.address.city}`}</Text>
     </View>
 }
 
@@ -44,6 +49,12 @@ const styles = StyleSheet.create({
         marginTop: 24,
         alignSelf: "center"
     },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        alignSelf: "center",
+        marginTop: 20
+    },
     address: {
         width: "90%",
         fontSize: 20,
@@ -53,7 +64,9 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     closeButton: {
-        alignSelf: "flex-end",
+        position: "absolute",
+        right: 10,
+        top: 10,
         padding: 20
-    }
+    },
 });

@@ -15,12 +15,22 @@ const getUsersSuccess = (data: UserItem[]): types.UsersActionTypes => {
         },
     };
 };
+
 const getMovieError = (error: string): types.UsersActionTypes => {
     return {
         type: types.GET_USERS_FAILURE,
         payload: {
             error,
         },
+    };
+};
+
+const addNewUser = (user: UserItem): types.UsersActionTypes => {
+    return {
+        type: types.ADD_NEW_USER,
+        payload: {
+            user
+        }
     };
 };
 

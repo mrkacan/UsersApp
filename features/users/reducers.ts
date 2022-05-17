@@ -28,6 +28,12 @@ const reducer = (state = initialState, action: types.UsersActionTypes) => {
             error: action.payload.error
         };
     }
+    case types.ADD_NEW_USER: {
+        return {
+            ...state,
+            data: [...state.data, action.payload]
+        };
+    }
     default:
         return state;
     }

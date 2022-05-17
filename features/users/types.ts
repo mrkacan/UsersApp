@@ -3,6 +3,7 @@ import {Action} from 'redux';
 const GET_USERS = 'GET_USERS';
 const GET_USERS_SUCCESS =  'GET_USERS_SUCCESS';
 const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
+const ADD_NEW_USER = 'ADD_NEW_USER';
 
 interface GetUsersAction extends Action {
     type: typeof GET_USERS;
@@ -22,10 +23,12 @@ interface GetUsersErrorAction extends Action {
     };
 }
 
-export type UsersActionTypes =
-    | GetUsersAction
-    | GetUsersSuccessAction
-    | GetUsersErrorAction
+interface AddNewUserAction extends Action {
+    type: typeof ADD_NEW_USER;
+    payload: {
+        user: UserItem
+    }
+}
 
     export interface Hair {
         color: string;
@@ -131,4 +134,11 @@ export {
     GET_USERS,
     GET_USERS_SUCCESS,
     GET_USERS_FAILURE,
+    ADD_NEW_USER
 };
+
+export type UsersActionTypes =
+    | GetUsersAction
+    | GetUsersSuccessAction
+    | GetUsersErrorAction
+    | AddNewUserAction
