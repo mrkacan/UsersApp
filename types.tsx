@@ -18,7 +18,7 @@ export type RootStackParamList = {
   Details: NavigatorScreenParams<{
     id: number
   }>;
-  NotFound: undefined;
+  AddNewUser: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

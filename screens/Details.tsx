@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, StyleSheet, Text, View, Pressable} from 'react-native';
 import {RootStackScreenProps} from '../types';
 import {useSelector} from "react-redux";
-import {getUserSelector} from "../features/movies/selectors";
+import {getUserSelector} from "../features/users/selectors";
 import FontAwesome from '@expo/vector-icons/build/FontAwesome';
 import {useNavigation} from "@react-navigation/native";
 import moment from "moment";

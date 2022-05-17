@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware} from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import {reducer} from '../features/root-reducer';
-import {handler as moviesSaga} from '../features/movies/sagas';
+import {handler as moviesSaga} from '../features/users/sagas';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistStore, persistReducer } from 'redux-persist'
 

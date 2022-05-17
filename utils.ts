@@ -1,4 +1,4 @@
-import {MovieItem} from "./features/movies/types";
+import {MovieItem} from "./features/users/types";
 
 const addOrRemove = (array: MovieItem[], value: MovieItem) => {
     let index = array.findIndex((item: MovieItem) => item.imdbID === value.imdbID);

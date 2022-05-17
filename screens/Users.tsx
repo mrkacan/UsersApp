@@ -2,21 +2,22 @@ import React, {useEffect} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
-import * as moviesAction from '../features/movies/actions';
+import * as moviesAction from '../features/users/actions';
 import ListView from "../components/ListView";
-import {getUsersSelector} from "../features/movies/selectors";
-import {useNavigation} from "@react-navigation/native";
+import {getUsersSelector} from "../features/users/selectors";
 import Button from '../components/Button';
+import {useNavigation} from "@react-navigation/native";
 
 export default function Users() {
     const dispatch = useDispatch();
+    const navigation = useNavigation();
     const {data} = useSelector(getUsersSelector);
     useEffect(() => {
         dispatch(moviesAction.getUsers());
     }, [])
 
     const onUserAddPress = () => {
-
+        navigation.navigate("AddNewUser")
     }
 
     return (

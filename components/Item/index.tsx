@@ -1,7 +1,7 @@
 import React from 'react';
 import {ImageBackground, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import {UserItem} from "../../features/movies/types";
+import {UserItem} from "../../features/users/types";
 import moment from "moment";
 
 interface ItemProps extends UserItem {

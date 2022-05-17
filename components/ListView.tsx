@@ -1,9 +1,9 @@
 import React from "react";
 import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
 import {useSelector} from 'react-redux';
-import {UserItem} from '../features/movies/types';
+import {UserItem} from '../features/users/types';
 import Item from "../components/Item";
-import {getUsersSelector} from "../features/movies/selectors";
+import {getUsersSelector} from "../features/users/selectors";
 import {useNavigation} from "@react-navigation/native";
 
 const INITIAL_LOAD = 10;
