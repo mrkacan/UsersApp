@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
+        width: 150
     },
     separator: {
         marginVertical: 30,
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         right: 10,
         top: 10,
-        padding: 20
+        padding: 20,
+        zIndex: 1
     },
 });

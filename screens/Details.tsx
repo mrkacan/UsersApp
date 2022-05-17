@@ -53,7 +53,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         alignSelf: "center",
-        marginTop: 20
+        textAlign: "center",
+        marginTop: 20,
+        width: 150
     },
     address: {
         width: "90%",
@@ -67,6 +69,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         right: 10,
         top: 10,
-        padding: 20
+        padding: 20,
+        zIndex: 1
     },
 });
